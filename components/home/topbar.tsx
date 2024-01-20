@@ -14,7 +14,7 @@ const TopBarContainer = styled('div')(({ theme }) => ({
 	color: 'white',
 	fontWeight: 700,
 	fontSize: '14px',
-	padding: '10px 20px',
+	padding: '15px 20px',
 
 	'@media (max-width: 900px)': {
 		display: 'none',

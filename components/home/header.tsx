@@ -54,6 +54,12 @@ export default function Header() {
 							justifyContent: 'space-evenly',
 							ml: 20,
 							gap: 2,
+
+							'& a': {
+								'&:hover': {
+									textDecoration: 'underline',
+								},
+							},
 						}}
 					>
 						<Link href='#' style={{ color: 'inherit' }}>
@@ -63,7 +69,7 @@ export default function Header() {
 							sx={{
 								display: 'inline-block',
 								position: 'relative',
-								groupHover: { '& div': { display: 'block' } },
+								groupHover: { '& Box': { display: 'block' } },
 							}}
 						>
 							<Link
