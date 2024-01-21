@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 import StoreProvider from './StoreProvider';
 import Header from '@/components/home/header';
 import { Footer } from '@/components/home/footer';
 
-const inter = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({
+	subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
 	title: 'Next Basket E-Commerce',
@@ -20,7 +22,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<StoreProvider>
-				<body className={inter.className}>
+				<body className={montserrat.className}>
 					<Header />
 					{children}
 					<Footer />
