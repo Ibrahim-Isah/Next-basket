@@ -6,9 +6,6 @@ import { Box, Grid } from '@mui/material';
 export default function Home() {
 	return (
 		<main>
-			<Topbar />
-			<Header />
-
 			<Box
 				sx={{
 					minHeight: '100vh',
