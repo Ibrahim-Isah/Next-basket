@@ -1,4 +1,7 @@
+import Featured from '@/components/home/featured';
+import FeaturedPost from '@/components/home/featured-post';
 import Hero from '@/components/home/hero';
+import Services from '@/components/home/services';
 import { Box } from '@mui/material';
 
 export default function Home() {
@@ -11,6 +14,9 @@ export default function Home() {
 				}}
 			>
 				<Hero />
+				<Featured />
+				<Services />
+				<FeaturedPost />
 			</Box>
 		</main>
 	);
