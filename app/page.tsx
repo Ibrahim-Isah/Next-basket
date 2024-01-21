@@ -1,7 +1,5 @@
-import CardWithBackground from '@/components/card-with-bg';
-import Header from '@/components/home/header';
-import Topbar from '@/components/home/topbar';
-import { Box, Grid } from '@mui/material';
+import Hero from '@/components/home/hero';
+import { Box } from '@mui/material';
 
 export default function Home() {
 	return (
@@ -12,13 +10,7 @@ export default function Home() {
 					width: '100%',
 				}}
 			>
-				<Grid container>
-					<Grid item xs={12} sm={12}>
-						{[1, 2, 3, 4].map((item) => (
-							<CardWithBackground key='item' />
-						))}
-					</Grid>
-				</Grid>
+				<Hero />
 			</Box>
 		</main>
 	);

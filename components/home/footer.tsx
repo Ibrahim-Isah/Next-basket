@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Box, TextField, Button } from '@mui/material';
+import { Box, TextField, Button, Typography } from '@mui/material';
 import logo from '@/assets/images/Bandage.png';
 import Image from 'next/image';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
@@ -147,17 +147,22 @@ export function Footer() {
 									Subscribe
 								</Button>
 							</Box>
-							<Box className='text-xs text-secondary-gray'>
+							<Box
+								sx={{
+									fontSize: '12px',
+									color: 'gray',
+								}}
+							>
 								Lore imp sum dolor Amit
 							</Box>
 						</Box>
 					</Box>
 				</Box>
 			</Box>
-			<Box className='mx-auto flex max-w-screen-1.5xl justify-center px-12 py-[25px] lg:px-0'>
-				<Box className='w-[200px] text-center text-sm font-bold text-secondary-gray md:w-full md:text-left'>
+			<Box sx={{ ...styles.top, py: 3 }}>
+				<Typography variant='subtitle1' color={'gray'} fontWeight={'bold'}>
 					Made With Love By Finland All Right Reserved
-				</Box>
+				</Typography>
 			</Box>
 		</footer>
 	);
@@ -236,5 +241,9 @@ const styles = {
 		fontWeight: 'normal',
 		textTransform: 'capitalize',
 		borderRadius: '0 10% 10% 0',
+	},
+	footer: {
+		color: '#f9f9f9',
+		fontWeight: 'bold',
 	},
 };
