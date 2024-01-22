@@ -31,7 +31,6 @@ const styles = {
 	},
 	containerStyle: {
 		margin: '0 auto',
-		maxWidth: 'screen-xl',
 		padding: '10px',
 		'@media (min-width: 600px)': {
 			padding: '20px 0',

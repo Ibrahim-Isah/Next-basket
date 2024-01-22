@@ -31,7 +31,7 @@ const styles = {
 		display: 'flex',
 		alignItems: 'center',
 		flexWrap: 'wrap',
-		justifyContent: 'space-between',
+		justifyContent: 'center',
 		gap: '37px',
 		padding: '28px',
 		'@media (min-width: 600px)': {

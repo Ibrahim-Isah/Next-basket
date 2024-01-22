@@ -32,8 +32,16 @@ const Sponsors = () => {
 				justifyContent='center'
 			>
 				{brands.map((brand, index) => (
-					<Grid item key={index} xs={12} sm={4} md={3} lg={2}>
-						<Image src={brand.icon} alt={brand.name} width={150} height={150} />
+					<Grid item key={index} xs={12} sm={6} md={4} lg={2}>
+						<Image
+							src={brand.icon}
+							alt={brand.name}
+							width={150}
+							height={150}
+							style={{
+								margin: '0 auto',
+							}}
+						/>
 					</Grid>
 				))}
 			</Grid>
