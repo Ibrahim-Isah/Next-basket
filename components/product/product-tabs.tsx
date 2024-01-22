@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, Typography, Paper, Box } from '@mui/material';
+import { Tab, Typography, Paper, Box, Container } from '@mui/material';
 import Image from 'next/image';
 import { Product } from './product-list';
+import { TabPanel, TabContext, TabList } from '@mui/lab';
 
 type Props = {
 	product: Product;
@@ -24,34 +25,13 @@ const data = [
 	},
 ];
 
-interface TabPanelProps {
-	children?: React.ReactNode;
-	index: string;
-	value: string;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-	const { children, value, index, ...other } = props;
-
-	return (
-		<div
-			role='tabpanel'
-			hidden={value !== index}
-			id={`simple-tabpanel-${index}`}
-			aria-labelledby={`simple-tab-${index}`}
-			{...other}
-		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
-		</div>
-	);
-}
-
 const ProductTabs: React.FC<Props> = ({ product }) => {
 	const [isClient, setIsClient] = useState(false);
+	const [value, setValue] = React.useState('1');
+
+	const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+		setValue(newValue);
+	};
 
 	useEffect(() => {
 		setIsClient(true);
@@ -59,9 +39,9 @@ const ProductTabs: React.FC<Props> = ({ product }) => {
 
 	if (!isClient) return null;
 	return (
-		<Box
+		<Container
 			sx={{
-				display: { xs: 'none', md: 'block' },
+				display: 'block',
 				bgcolor: 'white',
 				paddingBottom: 5,
 			}}
@@ -72,58 +52,64 @@ const ProductTabs: React.FC<Props> = ({ product }) => {
 					maxWidth: 1080,
 				}}
 			>
-				<Tabs value='description' centered>
-					{data.map(({ label, value }) => (
-						<Tab
-							key={value}
-							value={value}
-							label={label}
-							sx={{
-								fontWeight: 'semibold',
-							}}
-						/>
-					))}
-				</Tabs>
-				<Paper
-					variant='outlined'
-					sx={{
-						p: 1,
-						mt: 2,
-					}}
-				>
-					{data.map(({ value }) => (
-						<CustomTabPanel key={value} value={value} index={value}>
-							{value === 'description' && <DescriptionTab product={product} />}
-							{value === 'additional-information' && (
-								<AdditionalInformationTab />
-							)}
-							{value === 'reviews' && <ReviewsTab />}
-						</CustomTabPanel>
-					))}
-				</Paper>
+				<TabContext value={value}>
+					<Box
+						sx={{
+							borderBottom: 1,
+							borderColor: 'divider',
+							py: 1,
+							display: 'flex',
+							justifyContent: 'center',
+						}}
+					>
+						<TabList onChange={handleChange} aria-label='lab API tabs '>
+							{data.map(({ label, value }) => (
+								<Tab key={label} label={label} value={value} />
+							))}
+						</TabList>
+					</Box>
+					<Paper
+						variant='outlined'
+						sx={{
+							p: 1,
+							mt: 2,
+						}}
+					>
+						{data.map(({ value }) => (
+							<TabPanel key={value} value={value}>
+								{value === 'description' && (
+									<DescriptionTab product={product} />
+								)}
+								{value === 'additional-information' && (
+									<AdditionalInformationTab />
+								)}
+								{value === 'reviews' && <ReviewsTab />}
+							</TabPanel>
+						))}
+					</Paper>
+				</TabContext>
 			</Box>
-		</Box>
+		</Container>
 	);
 };
 
 const DescriptionTab: React.FC<Props> = ({ product }) => {
-	console.log(product);
 	return (
 		<Box
 			sx={{
-				display: 'flex',
+				display: { xs: 'block', md: 'flex' },
 				justifyContent: 'space-between',
 				alignItems: 'center',
 				flexWrap: 'wrap',
 			}}
 		>
-			<Box sx={{ width: '50%' }}>
+			<Box>
 				<Typography variant='h5' fontWeight='bold'>
 					{product.title}
 				</Typography>
 				<Typography variant='body1'>{product.description}</Typography>
 			</Box>
-			<Box style={{ width: '50%' }}>
+			<Box>
 				<Image
 					src={product.thumbnail}
 					alt={product.title}
