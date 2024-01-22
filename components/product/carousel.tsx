@@ -2,6 +2,7 @@
 'use client';
 
 import { Carousel } from 'react-responsive-carousel';
+import './carousel.css';
 
 type Props = {
 	imageLinks: string[];
@@ -15,6 +16,7 @@ export function PhotoCarousel({ imageLinks }: Props) {
 			autoPlay={true}
 			interval={5000}
 			transitionTime={500}
+			className='container'
 			thumbWidth={100}
 			showIndicators={false}
 		>
