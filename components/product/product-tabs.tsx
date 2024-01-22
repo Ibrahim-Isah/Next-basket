@@ -27,7 +27,7 @@ const data = [
 
 const ProductTabs: React.FC<Props> = ({ product }) => {
 	const [isClient, setIsClient] = useState(false);
-	const [value, setValue] = React.useState('1');
+	const [value, setValue] = React.useState(data[0].value);
 
 	const handleChange = (event: React.SyntheticEvent, newValue: string) => {
 		setValue(newValue);
@@ -97,10 +97,10 @@ const DescriptionTab: React.FC<Props> = ({ product }) => {
 	return (
 		<Box
 			sx={{
-				display: { xs: 'block', md: 'flex' },
+				display: { sm: 'block', md: 'flex' },
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				flexWrap: 'wrap',
+				gap: 5,
 			}}
 		>
 			<Box>
@@ -109,7 +109,11 @@ const DescriptionTab: React.FC<Props> = ({ product }) => {
 				</Typography>
 				<Typography variant='body1'>{product.description}</Typography>
 			</Box>
-			<Box>
+			<Box
+				sx={{
+					py: { xs: 5, md: 0 },
+				}}
+			>
 				<Image
 					src={product.thumbnail}
 					alt={product.title}

@@ -2,6 +2,7 @@ import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 import { Product } from './product-list';
+import { formatCurrency } from '@/lib/utils';
 
 const styles = {
 	card: {
@@ -55,13 +56,6 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-	const formatCurrency = (value: number | string) => {
-		const numericValue = typeof value === 'string' ? parseFloat(value) : value;
-		return new Intl.NumberFormat('en-US', {
-			style: 'currency',
-			currency: 'USD',
-		}).format(numericValue);
-	};
 	const discountedPrice =
 		product.price - product.price * (product.discountPercentage / 100);
 
