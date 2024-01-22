@@ -1,6 +1,7 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
+import ProductList from '../product/product-list';
 
 const styles = {
 	button: {
@@ -55,7 +56,26 @@ const styles = {
 };
 
 const Featured = () => {
-	const isLoading = false;
+	const [featuredProducts, setFeaturedProducts] = useState([]);
+	// const pages = Math.ceil(total / limit);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		async function getProducts() {
+			const response = await fetch('https://dummyjson.com/products', {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			const data = await response.json();
+			console.log(data, 'checking for request');
+			setFeaturedProducts(data.products as any);
+		}
+
+		getProducts();
+	}, []);
 	return (
 		<Container sx={styles.containerStyle}>
 			<Box sx={styles.sectionStyle}>
@@ -69,10 +89,7 @@ const Featured = () => {
 					</Typography>
 				</Box>
 
-				{/* <ProductListGrid
-					products={featuredProducts}
-					sx={productListGridStyle}
-				/> */}
+				<ProductList products={featuredProducts} />
 
 				{/* {currentPage + 1 < pages && ( */}
 				<Box sx={styles.buttonContainerStyle}>
