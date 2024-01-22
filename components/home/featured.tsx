@@ -1,7 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
-import ProductList from '../product/product-list';
+import ProductList, {
+	Product,
+	ProductsResponse,
+} from '../product/product-list';
+import { fetchApi } from '@/services/api';
 
 const styles = {
 	button: {
@@ -56,26 +60,43 @@ const styles = {
 };
 
 const Featured = () => {
-	const [featuredProducts, setFeaturedProducts] = useState([]);
-	// const pages = Math.ceil(total / limit);
+	const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+	const [total, setTotal] = useState(0);
+	const [limit, setLimit] = useState(0);
+	const pages = Math.ceil(total / limit);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		async function getProducts() {
-			const response = await fetch('https://dummyjson.com/products', {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-
-			const data = await response.json();
-			console.log(data, 'checking for request');
-			setFeaturedProducts(data.products as any);
+			const response = await fetchApi('products?limit=10');
+			if (response.products) {
+				setFeaturedProducts(response.products);
+				setTotal(response.total);
+				setLimit(response.limit);
+			}
 		}
 
 		getProducts();
 	}, []);
+
+	const loadMore = async () => {
+		const nextPage = currentPage + 1;
+
+		if (nextPage > pages) return;
+
+		setIsLoading(true);
+		const loadMoreProductsResponse: ProductsResponse = await fetchApi(
+			`products?limit=${limit}&skip=${(nextPage - 1) * limit}`
+		);
+		setFeaturedProducts([
+			...featuredProducts,
+			...loadMoreProductsResponse.products,
+		]);
+		setCurrentPage(nextPage);
+		setIsLoading(false);
+	};
+
 	return (
 		<Container sx={styles.containerStyle}>
 			<Box sx={styles.sectionStyle}>
@@ -91,18 +112,18 @@ const Featured = () => {
 
 				<ProductList products={featuredProducts} />
 
-				{/* {currentPage + 1 < pages && ( */}
-				<Box sx={styles.buttonContainerStyle}>
-					<Button
-						variant='outlined'
-						sx={styles.button}
-						// loading={isLoading}
-						// onClick={handleLoadMoreProducts}
-					>
-						{isLoading ? 'Loading products' : 'Load more products'}
-					</Button>
-				</Box>
-				{/* )} */}
+				{currentPage + 1 < pages && (
+					<Box sx={styles.buttonContainerStyle}>
+						<Button
+							variant='outlined'
+							sx={styles.button}
+							disabled={isLoading}
+							onClick={loadMore}
+						>
+							{isLoading ? 'Loading products' : 'Load more products'}
+						</Button>
+					</Box>
+				)}
 			</Box>
 		</Container>
 	);

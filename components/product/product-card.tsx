@@ -67,7 +67,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
 	return (
 		<Link href={`/products/${product.id}`} passHref>
-			<Card component='a' sx={styles.card} title={product.title}>
+			<Card component='div' sx={styles.card} title={product.title}>
 				<CardMedia
 					component='div'
 					sx={styles.media}

@@ -1,3 +1,5 @@
+'use client';
+
 import CallToAction from '@/components/home/call-to-action';
 import Featured from '@/components/home/featured';
 import FeaturedPost from '@/components/home/featured-post';
