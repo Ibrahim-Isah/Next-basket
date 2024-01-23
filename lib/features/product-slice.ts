@@ -6,7 +6,7 @@ type CartProps = Product & {
 };
 type WishlistProps = Product;
 
-type ProductStateProps = {
+export type ProductStateProps = {
 	cart: CartProps[];
 	wishlist: WishlistProps[];
 };

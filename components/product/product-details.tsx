@@ -11,6 +11,13 @@ import { Product } from './product-list';
 import LikeIcon from '@/assets/svg/love.svg';
 import Image from 'next/image';
 import './carousel.css';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import {
+	ProductStateProps,
+	addToCart,
+	addWishlist,
+} from '@/lib/features/product-slice';
+import { RootState } from '@/lib/store';
 
 const styles = {
 	flexContainer: {
@@ -58,7 +65,19 @@ type Props = {
 };
 
 const ProductDetails: React.FC<Props> = ({ product }) => {
-	const hasStock = true;
+	const dispatch = useAppDispatch();
+	const cart = useAppSelector(
+		(state: RootState): ProductStateProps['cart'] => state.product.cart
+	);
+	const wishlist = useAppSelector(
+		(state: RootState): ProductStateProps['wishlist'] => state.product.wishlist
+	);
+
+	const hasStock = product.stock > 0;
+
+	const productInCart = cart.some((item) => item.id === product.id);
+	const isWishList = wishlist.some((item) => item.id === product.id);
+
 	return (
 		<Container>
 			<Box sx={styles.flexContainer}>
@@ -187,10 +206,28 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 							>
 								Select Options
 							</Button>
-							<Button size='small'>
+							<Button
+								size='small'
+								sx={{
+									bgcolor: isWishList ? '#E77C40' : 'transparent',
+								}}
+								onClick={() => {
+									dispatch(addWishlist(product));
+								}}
+							>
 								<Image src={LikeIcon} alt='Icons' width={40} height={40} />
 							</Button>
-							<Button size='small'>
+							<Button
+								size='small'
+								sx={{
+									bgcolor: productInCart ? '#23A6F0' : 'transparent',
+								}}
+								onClick={() => {
+									if (!productInCart) {
+										dispatch(addToCart(product));
+									}
+								}}
+							>
 								<Image src={CartIcon} alt='Icons' width={40} height={40} />
 							</Button>
 							<Button size='small'>
