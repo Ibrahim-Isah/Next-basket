@@ -41,7 +41,7 @@ const ProductTabs: React.FC<Props> = ({ product }) => {
 	return (
 		<Container
 			sx={{
-				display: 'block',
+				display: { xs: 'none', md: 'block' },
 				bgcolor: 'white',
 				paddingBottom: 5,
 			}}
