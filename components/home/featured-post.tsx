@@ -42,7 +42,7 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		marginBottom: '10px',
+		marginBottom: '30px',
 		textAlign: 'center',
 
 		'>': {
@@ -52,7 +52,7 @@ const styles = {
 };
 const FeaturedPost = () => {
 	return (
-		<Container>
+		<Container sx={{ my: '50px' }}>
 			<Box sx={styles.titleContainer}>
 				<Typography variant='h6' color={'#23A6F0'}>
 					Practice Advice

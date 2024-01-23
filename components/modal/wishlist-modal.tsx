@@ -1,20 +1,12 @@
+import { Delete as DeleteIcon } from '@mui/icons-material';
+import { Box, Button, List, ListItem, Typography } from '@mui/material';
 import * as React from 'react';
-import { Typography, List, ListItem, Box, Button } from '@mui/material';
-import { Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 
-import Modal from './main-modal';
-import { formatCurrency } from '@/lib/utils';
+import { addWishlist, getWishlistProducts } from '@/lib/features/product-slice';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import {
-	addProduct,
-	addWishlist,
-	deleteFromCart,
-	getCartProducts,
-	getWishlistProducts,
-	reduceProduct,
-} from '@/lib/features/product-slice';
-import { Product } from '../product/product-list';
 import Image from 'next/image';
+import { Product } from '../product/product-list';
+import Modal from './main-modal';
 
 interface WishlistModalProps {
 	open: boolean;

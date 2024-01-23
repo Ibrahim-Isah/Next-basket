@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Box, TextField, Button, Typography } from '@mui/material';
+import { Box, TextField, Button, Typography, Container } from '@mui/material';
 import logo from '@/assets/images/Bandage.png';
 import Image from 'next/image';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
@@ -18,7 +18,7 @@ export function Footer() {
 					bgcolor: 'white',
 				}}
 			>
-				<Box sx={styles.top}>
+				<Container sx={styles.top}>
 					<Image src={logo} alt='Bandage Logo' width={130} height={30} />
 					<Box
 						sx={{
@@ -50,7 +50,7 @@ export function Footer() {
 							}}
 						/>
 					</Box>
-				</Box>
+				</Container>
 			</Box>
 			<Box
 				component={'section'}
@@ -58,7 +58,7 @@ export function Footer() {
 					bgcolor: 'white',
 				}}
 			>
-				<Box sx={styles.sectionContainer}>
+				<Container sx={styles.sectionContainer}>
 					<Box sx={styles.container}>
 						<Box component={'span'} fontWeight={'bold'}>
 							Company Info
@@ -157,7 +157,7 @@ export function Footer() {
 							</Box>
 						</Box>
 					</Box>
-				</Box>
+				</Container>
 			</Box>
 			<Box sx={{ ...styles.top, py: 3 }}>
 				<Typography variant='subtitle1' color={'gray'} fontWeight={'bold'}>
@@ -171,17 +171,15 @@ export function Footer() {
 const styles = {
 	top: {
 		display: 'flex',
-		maxWidth: 1080,
-		mx: 'auto',
-		alignItems: 'center',
+		mx: { xs: 2, md: 'auto' },
+		flexDirection: { xs: 'column', md: 'row' },
 		justifyContent: 'space-between',
 		borderBottom: '1px solid #E6E6E6',
 		px: { sm: 10, lg: 0 },
-		py: { sm: 20, md: 5 },
+		py: { xs: 5, md: 5 },
 	},
 	sectionContainer: {
-		mx: 'auto',
-		maxWidth: 1080,
+		mx: { xs: 2, md: 'auto' },
 		display: 'flex',
 		flexWrap: { xs: 'nowrap', sm: 'wrap' },
 		flexDirection: { xs: 'column', sm: 'row' },
@@ -192,7 +190,7 @@ const styles = {
 	container: {
 		display: 'flex',
 		flexDirection: 'column',
-		width: '150px',
+		width: { xs: '90%', sm: '150px' },
 
 		'>': {
 			marginBottom: '10px',
@@ -220,12 +218,9 @@ const styles = {
 		width: '100%',
 	},
 	input: {
-		bgcolor: '#f9f9f9',
-		px: 10,
 		fontSize: '16px',
-		height: '58px',
+		height: '60px',
 		pr: 4,
-		width: '100',
 		borderRadius: '10% 0 0 10%',
 	},
 	button: {

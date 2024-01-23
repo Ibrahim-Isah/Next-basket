@@ -24,7 +24,7 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		marginBottom: '10px',
+		marginBottom: '30px',
 		textAlign: 'center',
 
 		'>': {
@@ -47,9 +47,9 @@ const styles = {
 		paddingTop: '6px',
 	},
 	containerStyle: {
-		margin: '0 auto',
+		margin: '50px auto',
 		maxWidth: 'screen-xl',
-		padding: '10px',
+		padding: '15px',
 		'@media (min-width: 600px)': {
 			padding: '20px 0',
 		},

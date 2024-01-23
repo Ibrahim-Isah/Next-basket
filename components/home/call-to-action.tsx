@@ -6,6 +6,7 @@ const styles = {
 		background: `url(${bottom.src}) center/cover no-repeat`,
 		width: '100%',
 		py: 7,
+		px: { xs: 2, sm: 0 },
 		'@media (min-width: 600px)': {
 			py: 10,
 		},
@@ -17,7 +18,6 @@ const styles = {
 		justifyContent: 'center',
 	},
 	contentWrapper: {
-		flex: '0 0 458px',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',

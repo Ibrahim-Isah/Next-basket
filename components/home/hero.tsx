@@ -31,7 +31,7 @@ const styles = {
 	containerStyle: {
 		margin: '20px auto',
 		maxWidth: 1080,
-		padding: '10px',
+		padding: '15px',
 		'@media (min-width: 600px)': {
 			padding: '20px 0',
 		},

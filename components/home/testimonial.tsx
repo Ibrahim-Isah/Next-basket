@@ -19,7 +19,7 @@ import review9 from '@/assets/images/review-9.png';
 
 const styles = {
 	section: {
-		margin: 'auto',
+		margin: '50px auto',
 		maxWidth: '1128px',
 		paddingBottom: '10px',
 		paddingTop: '55px',
