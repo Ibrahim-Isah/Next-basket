@@ -1,8 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import logo from '@/assets/images/Bandage.png';
+import {
+	getCartProducts,
+	getWishlistProducts,
+} from '@/lib/features/product-slice';
+import { useAppSelector } from '@/lib/hooks';
 import CloseIcon from '@mui/icons-material/Close';
 import ChevronDownIcon from '@mui/icons-material/ExpandMore';
 import HeartIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -21,18 +26,12 @@ import {
 	SwipeableDrawer,
 	Toolbar,
 	Typography,
-	Button,
 } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import Topbar from './topbar';
-import { useAppSelector } from '@/lib/hooks';
-import {
-	getCartProducts,
-	getWishlistProducts,
-} from '@/lib/features/product-slice';
 import CartModal from '../modal/cart-modal';
 import WishlistModal from '../modal/wishlist-modal';
+import Topbar from './topbar';
 
 const NavList = () => {
 	return (

@@ -14,7 +14,14 @@ import {
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { formatCurrency } from '@/lib/utils';
 import StarIcon from '@mui/icons-material/Star';
-import { Box, Button, Container, Typography } from '@mui/material';
+import {
+	Box,
+	Button,
+	Container,
+	Typography,
+	Alert,
+	Snackbar,
+} from '@mui/material';
 import Image from 'next/image';
 import { PhotoCarousel } from './carousel';
 import './carousel.css';
@@ -67,6 +74,8 @@ type Props = {
 
 const ProductDetails: React.FC<Props> = ({ product }) => {
 	const [isClient, setIsClient] = useState(false);
+	const [openSnack, setOpenSnack] = useState(false);
+
 	const dispatch = useAppDispatch();
 	const cart = useAppSelector(getCartProducts);
 	const wishlist = useAppSelector(getWishlistProducts);
@@ -75,6 +84,17 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 
 	const productInCart = cart.some((item) => item.id === product.id);
 	const isWishList = wishlist.some((item) => item.id === product.id);
+
+	const handleSnackClose = (
+		event?: React.SyntheticEvent | Event,
+		reason?: string
+	) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		setOpenSnack(false);
+	};
 
 	useEffect(() => {
 		setIsClient(true);
@@ -217,6 +237,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 								}}
 								onClick={() => {
 									dispatch(addWishlist(product));
+									setOpenSnack(true);
 								}}
 							>
 								<Image src={LikeIcon} alt='Icons' width={40} height={40} />
@@ -229,6 +250,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 								onClick={() => {
 									if (!productInCart) {
 										dispatch(addToCart(product));
+										setOpenSnack(true);
 									}
 								}}
 							>
@@ -241,6 +263,20 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 					</Box>
 				</Box>
 			</Box>
+			<Snackbar
+				open={openSnack}
+				autoHideDuration={6000}
+				onClose={handleSnackClose}
+			>
+				<Alert
+					onClose={handleSnackClose}
+					severity='success'
+					variant='filled'
+					sx={{ width: '100%' }}
+				>
+					Item added successfully.
+				</Alert>
+			</Snackbar>
 		</Container>
 	);
 };
