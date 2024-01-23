@@ -149,7 +149,7 @@ export default function Header() {
 						<Image src={logo} alt='Bandage Logo' width={100} height={20} />
 						<Box
 							sx={{
-								display: { lg: 'flex', xs: 'none' },
+								display: { md: 'flex', xs: 'none' },
 								justifyContent: 'space-evenly',
 								ml: 20,
 								gap: 2,
@@ -230,7 +230,7 @@ export default function Header() {
 					</Box>
 					<Box
 						sx={{
-							display: { lg: 'flex', xs: 'none' },
+							display: { md: 'flex', xs: 'none' },
 							alignItems: 'center',
 							gap: 2,
 							color: '#23A6F0',
@@ -279,7 +279,7 @@ export default function Header() {
 					</Box>
 					<IconButton
 						sx={{
-							display: { lg: 'none' },
+							display: { md: 'none' },
 						}}
 						onClick={() => setOpen(!open)}
 					>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Container } from '@mui/material';
+import { Grid, Container, Box } from '@mui/material';
 import Image from 'next/image';
 import Hooli from '@/assets/svg/hooli.svg';
 import Lyft from '@/assets/svg/lyft.svg';
@@ -33,15 +33,20 @@ const Sponsors = () => {
 			>
 				{brands.map((brand, index) => (
 					<Grid item key={index} xs={12} sm={6} md={4} lg={2}>
-						<Image
-							src={brand.icon}
-							alt={brand.name}
-							width={150}
-							height={150}
-							style={{
-								margin: '0 auto',
+						<Box
+							sx={{
+								px: 'auto',
+								mx: 'auto',
+								width: 'fit-content',
 							}}
-						/>
+						>
+							<Image
+								src={brand.icon}
+								alt={brand.name}
+								width={150}
+								height={150}
+							/>
+						</Box>
 					</Grid>
 				))}
 			</Grid>

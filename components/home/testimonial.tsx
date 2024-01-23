@@ -20,7 +20,6 @@ import review9 from '@/assets/images/review-9.png';
 const styles = {
 	section: {
 		margin: '50px auto',
-		maxWidth: '1128px',
 		paddingBottom: '10px',
 		paddingTop: '55px',
 		'@media (min-width: 600px)': {
@@ -152,7 +151,7 @@ const Testimonial = () => {
 					container
 					spacing={2}
 					sx={{
-						maxWidth: '500px',
+						maxWidth: { xs: 'auto', md: '500px' },
 					}}
 				>
 					{images.map((image, i) => (
