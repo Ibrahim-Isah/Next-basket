@@ -258,7 +258,9 @@ export default function Header() {
 							}}
 						>
 							<ShoppingCartIcon sx={{ width: 24, height: 24 }} />
-							<Typography variant='body1'>{cart.length}</Typography>
+							<Typography variant='body1'>
+								{cart.length > 0 && cart.length}
+							</Typography>
 						</Box>
 						<Box
 							sx={{
@@ -270,7 +272,9 @@ export default function Header() {
 							}}
 						>
 							<HeartIcon sx={{ width: 24, height: 24 }} />
-							<Typography variant='body1'>{wishlist.length}</Typography>
+							<Typography variant='body1'>
+								{wishlist.length > 0 && wishlist.length}
+							</Typography>
 						</Box>
 					</Box>
 					<IconButton
@@ -338,7 +342,9 @@ export default function Header() {
 								}}
 							>
 								<ShoppingCartIcon sx={{ width: 24, height: 24 }} />
-								<Typography variant='body1'>{cart.length}</Typography>
+								<Typography variant='body1'>
+									{cart.length > 0 && cart.length}
+								</Typography>
 							</Box>
 							<Box
 								display={'flex'}
@@ -347,7 +353,9 @@ export default function Header() {
 								}}
 							>
 								<HeartIcon sx={{ width: 24, height: 24 }} />
-								<Typography variant='body1'>{wishlist.length}</Typography>
+								<Typography variant='body1'>
+									{wishlist.length > 0 && wishlist.length}
+								</Typography>
 							</Box>
 						</Box>
 					</Box>

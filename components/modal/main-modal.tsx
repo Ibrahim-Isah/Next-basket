@@ -8,12 +8,12 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+const BootstrapDialog = styled(Dialog)(() => ({
 	'& .MuiDialogContent-root': {
-		padding: theme.spacing(2),
+		padding: 2,
 	},
 	'& .MuiDialogActions-root': {
-		padding: theme.spacing(1),
+		padding: 1,
 	},
 }));
 
@@ -51,7 +51,17 @@ const Modal: React.FC<ModalProps> = ({
 				>
 					<CloseIcon />
 				</IconButton>
-				<DialogContent dividers>{children}</DialogContent>
+				<DialogContent
+					dividers
+					sx={{
+						width: {
+							xs: 'auto',
+							sm: '500px',
+						},
+					}}
+				>
+					{children}
+				</DialogContent>
 				<DialogActions>
 					<Button autoFocus onClick={handleClose}>
 						Close
