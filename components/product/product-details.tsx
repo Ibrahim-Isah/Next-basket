@@ -10,6 +10,7 @@ import { PhotoCarousel } from './carousel';
 import { Product } from './product-list';
 import LikeIcon from '@/assets/svg/love.svg';
 import Image from 'next/image';
+import './carousel.css';
 
 const styles = {
 	flexContainer: {
@@ -27,16 +28,17 @@ const styles = {
 		justifyContent: 'space-between',
 		pb: 10,
 		pt: 3,
-		my: 5,
 		width: 'full',
 		'@media (min-width: 600px)': {
 			width: '1/2',
 		},
 	},
 	rounded: {
-		height: '50px',
-		width: '10px',
+		width: '40px',
+		minWidth: '20px',
+		height: '40px',
 		borderRadius: '50%',
+		p: 0,
 	},
 	iconButton: {
 		display: 'flex',
@@ -66,7 +68,13 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 				<Box sx={styles.infoContainer}>
 					<Box>
 						<Box sx={{ marginBottom: '67px' }}>
-							<Typography variant='h4'>{product.title}</Typography>
+							<Typography
+								variant='subtitle1'
+								fontSize={28}
+								fontWeight={'light'}
+							>
+								{product.title}
+							</Typography>
 							<Box
 								sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
 							>
@@ -85,7 +93,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 							</Box>
 						</Box>
 						<Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-							<Typography variant='h5' fontWeight={500}>
+							<Typography variant='h5' fontWeight={700}>
 								{formatCurrency(product.price)}
 							</Typography>
 							<Box sx={{ fontWeight: 600, mb: 1 }}>
@@ -111,7 +119,13 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 						</Box>
 					</Box>
 					<Box>
-						<Box sx={{ display: 'flex', gap: 1, my: 4 }}>
+						<Box
+							sx={{
+								display: 'flex',
+								gap: 1,
+								my: 4,
+							}}
+						>
 							<Button
 								sx={{
 									bgcolor: '#23A6F0',
