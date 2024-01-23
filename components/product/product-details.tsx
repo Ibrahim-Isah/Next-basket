@@ -1,23 +1,24 @@
 'use client';
 
-import EyeIcon from '@/assets/svg/eye.svg';
-import { formatCurrency } from '@/lib/utils';
+import React, { useEffect, useState } from 'react';
+
 import CartIcon from '@/assets/svg/cart.svg';
-import StarIcon from '@mui/icons-material/Star';
-import { Box, Button, Container, Typography } from '@mui/material';
-import React from 'react';
-import { PhotoCarousel } from './carousel';
-import { Product } from './product-list';
+import EyeIcon from '@/assets/svg/eye.svg';
 import LikeIcon from '@/assets/svg/love.svg';
-import Image from 'next/image';
-import './carousel.css';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import {
-	ProductStateProps,
 	addToCart,
 	addWishlist,
+	getCartProducts,
+	getWishlistProducts,
 } from '@/lib/features/product-slice';
-import { RootState } from '@/lib/store';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { formatCurrency } from '@/lib/utils';
+import StarIcon from '@mui/icons-material/Star';
+import { Box, Button, Container, Typography } from '@mui/material';
+import Image from 'next/image';
+import { PhotoCarousel } from './carousel';
+import './carousel.css';
+import { Product } from './product-list';
 
 const styles = {
 	flexContainer: {
@@ -65,18 +66,21 @@ type Props = {
 };
 
 const ProductDetails: React.FC<Props> = ({ product }) => {
+	const [isClient, setIsClient] = useState(false);
 	const dispatch = useAppDispatch();
-	const cart = useAppSelector(
-		(state: RootState): ProductStateProps['cart'] => state.product.cart
-	);
-	const wishlist = useAppSelector(
-		(state: RootState): ProductStateProps['wishlist'] => state.product.wishlist
-	);
+	const cart = useAppSelector(getCartProducts);
+	const wishlist = useAppSelector(getWishlistProducts);
 
 	const hasStock = product.stock > 0;
 
 	const productInCart = cart.some((item) => item.id === product.id);
 	const isWishList = wishlist.some((item) => item.id === product.id);
+
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
+
+	if (!isClient) return null;
 
 	return (
 		<Container>

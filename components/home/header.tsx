@@ -1,15 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import logo from '@/assets/images/Bandage.png';
 import CloseIcon from '@mui/icons-material/Close';
 import ChevronDownIcon from '@mui/icons-material/ExpandMore';
-import HeartIcon from '@mui/icons-material/Favorite';
+import HeartIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
-import UserIcon from '@mui/icons-material/Person';
-import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import UserIcon from '@mui/icons-material/PersonOutline';
+import SearchIcon from '@mui/icons-material/SearchOutlined';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
 import {
 	AppBar,
 	Box,
@@ -21,10 +21,18 @@ import {
 	SwipeableDrawer,
 	Toolbar,
 	Typography,
+	Button,
 } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import Topbar from './topbar';
+import { useAppSelector } from '@/lib/hooks';
+import {
+	getCartProducts,
+	getWishlistProducts,
+} from '@/lib/features/product-slice';
+import CartModal from '../modal/cart-modal';
+import WishlistModal from '../modal/wishlist-modal';
 
 const NavList = () => {
 	return (
@@ -89,8 +97,17 @@ const NavList = () => {
 };
 
 export default function Header() {
+	const [isClient, setIsClient] = useState(false);
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [open, setOpen] = React.useState<boolean>(false);
+	const [openCart, setOpenCart] = React.useState(false);
+	const [openWishlist, setOpenWishlist] = React.useState(false);
+	const cart = useAppSelector(getCartProducts);
+	const wishlist = useAppSelector(getWishlistProducts);
+
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
 
 	const handleClick = (event: any) => {
 		setAnchorEl(event.currentTarget);
@@ -99,6 +116,8 @@ export default function Header() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	if (!isClient) return null;
 
 	return (
 		<header>
@@ -229,8 +248,30 @@ export default function Header() {
 							Log In / Register
 						</Link>
 						<SearchIcon sx={{ width: 24, height: 24 }} />
-						<ShoppingCartIcon sx={{ width: 24, height: 24 }} />
-						<HeartIcon sx={{ width: 24, height: 24 }} />
+						<Box
+							sx={{
+								display: ' flex',
+								cursor: 'pointer',
+							}}
+							onClick={() => {
+								setOpenCart(!openCart);
+							}}
+						>
+							<ShoppingCartIcon sx={{ width: 24, height: 24 }} />
+							<Typography variant='body1'>{cart.length}</Typography>
+						</Box>
+						<Box
+							sx={{
+								display: ' flex',
+								cursor: 'pointer',
+							}}
+							onClick={() => {
+								setOpenWishlist(!openWishlist);
+							}}
+						>
+							<HeartIcon sx={{ width: 24, height: 24 }} />
+							<Typography variant='body1'>{wishlist.length}</Typography>
+						</Box>
 					</Box>
 					<IconButton
 						sx={{
@@ -290,12 +331,30 @@ export default function Header() {
 								Log In / Register
 							</Link>
 							<SearchIcon sx={{ width: 24, height: 24 }} />
-							<ShoppingCartIcon sx={{ width: 24, height: 24 }} />
-							<HeartIcon sx={{ width: 24, height: 24 }} />
+							<Box
+								display={'flex'}
+								onClick={() => {
+									setOpenCart(!openCart);
+								}}
+							>
+								<ShoppingCartIcon sx={{ width: 24, height: 24 }} />
+								<Typography variant='body1'>{cart.length}</Typography>
+							</Box>
+							<Box
+								display={'flex'}
+								onClick={() => {
+									setOpenWishlist(!openWishlist);
+								}}
+							>
+								<HeartIcon sx={{ width: 24, height: 24 }} />
+								<Typography variant='body1'>{wishlist.length}</Typography>
+							</Box>
 						</Box>
 					</Box>
 				</SwipeableDrawer>
 			</AppBar>
+			<CartModal open={openCart} setOpen={setOpenCart} />
+			<WishlistModal open={openWishlist} setOpen={setOpenWishlist} />
 		</header>
 	);
 }

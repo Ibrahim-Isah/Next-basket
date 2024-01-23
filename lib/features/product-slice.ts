@@ -1,5 +1,6 @@
 import { Product } from '@/components/product/product-list';
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 type CartProps = Product & {
 	quantity: number;
@@ -106,4 +107,17 @@ export const {
 	deleteFromCart,
 	reduceProduct,
 } = productSlice.actions;
+
+export const getCartProducts = (
+	state: RootState
+): ProductStateProps['cart'] => {
+	return state.product.cart;
+};
+
+export const getWishlistProducts = (
+	state: RootState
+): ProductStateProps['wishlist'] => {
+	return state.product.wishlist;
+};
+
 export default productSlice.reducer;
